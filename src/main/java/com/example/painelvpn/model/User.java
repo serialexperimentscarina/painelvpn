@@ -37,4 +37,12 @@ public class User {
   @Getter
   @Setter
   private int role;
+
+  @Getter
+  @Setter
+  private boolean locked;
+
+  @Getter
+  @Setter
+  private int loginAttempts;
 }

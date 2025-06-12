@@ -38,17 +38,43 @@ public class LoginController {
       return "index.html";
     }
 
-    Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
-    if (user.isEmpty()) {
-      model.addAttribute("error", "Username ou password estão incorretos.");
+    Optional<User> userOptional = userRepository.findByUsername(username);
+    if (userOptional.isEmpty()) {
+      model.addAttribute("error", "Username não encontrado.");
       return "index.html";
-    } else {
-      session.setAttribute("loggedUser", user.get());
-      if (user.get().getRole() == 1) {
-        return "admin-dashboard";
-      } else {
-        return "dashboard";
+    }
+
+    User user = userOptional.get();
+    if (user.isLocked()) {
+      model.addAttribute("error", "Conta bloqueada. Entre em contato com o administrador da rede");
+      return "index";
+    }
+
+    if (!user.getPassword().equals(password)) {
+      user.setLoginAttempts(user.getLoginAttempts() + 1);
+
+      if (user.getLoginAttempts() >= 10) {
+        user.setLocked(true);
       }
+      userRepository.save(user);
+
+      if (user.isLocked()) {
+        model.addAttribute("error", "Conta bloqueada. Entre em contato com o administrador da rede.");
+      } else {
+        model.addAttribute("error",
+            "Username ou password incorretos. Tentativas restantes: " + (10 - user.getLoginAttempts()));
+      }
+      return "index";
+    }
+
+    session.setAttribute("loggedUser", user);
+    user.setLoginAttempts(0);
+    userRepository.save(user);
+
+    if (user.getRole() == 1) {
+      return "admin-dashboard";
+    } else {
+      return "dashboard";
     }
   }
 }
