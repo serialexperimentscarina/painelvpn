@@ -14,21 +14,37 @@
   <div class="container">
       <div class="sidebar">
           <ul>
-            <li><a href="/registrar-usuario">Novo</a></li>
+            <li><a href="/admin-dashboard">Home</a></li>
           </ul>
       </div>
 
       <div class="content">
+        <form id="userEdit" th:action="@{/editar-usuarios}" method="post">
+          <select name="action" required>
+                <option value="">Editar</option>
+                <option value="promote">Eleger como administrador</option>
+                <option value="revoke">Revogar administrador</option>
+                <option value="lock">Revogar Acesso</option>
+                <option value="unlock">Ativar Acesso</option>
+                <option value="delete">Remover o cadastro</option>
+              </select>
+          <button type="submit">Aplicar modificações</button>
+          <a href="/registrar-usuario">
+            <button type="button">Novo</button>
+          </a>
           <table>
             <tr>
+                <th></th>
                 <th>Nome</th>
                 <th>Função</th>
             </tr>
             <tr th:each="user : ${users}">
+                <td><input type="checkbox" name="userIds" th:value="${user.id}" /></td>
                 <td th:text="${user.fullname}"></td>
-                <td th:text="${user.role}"></td>
+                <td th:text="${user.role == 0 ? 'Funcionário' : 'Administrador'}"></td>
             </tr>
-        </table>
+          </table>
+        </form>
       </div>
   </div>
 </body>

@@ -72,6 +72,7 @@ public class LoginController {
     userRepository.save(user);
 
     if (user.getRole() == 1) {
+      model.addAttribute("users", userRepository.findAll());
       return "admin-dashboard";
     } else {
       return "dashboard";
