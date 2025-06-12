@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title>PainelVPN</title>
+</head>
+<body>
+    <div>
+      <h2>Redefinir uma nova senha</h2>
+      <form th:action="@{/nova-senha}" method="post">
+        <input type="hidden" name="username" th:value="${username}" />
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
+          <label for="confirmPassword">Confirmação:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+          <p style="color: red;">Deve ter no mínimo 8 caracteres;</p>
+          <p style="color: red;">No mínimo 1 caractere de A-Z;</p>
+          <p style="color: red;">No mínimo 1 dígito de 0-9;</p>
+          <p style="color: red;">Um carácter especial como !@#$%&*-_+=.</p>
+          <button type="submit">Confirmar</button>
+      </form>
+      <p style="color: red;">
+        <span th:if="${error}" th:text="${error}"></span>
+      </p>
+      <p style="color: green;">
+        <span th:if="${message}" th:text="${message}"></span>
+      </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- src/main/resources/static/index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title>PainelVPN</title>
+</head>
+<body class="altbody">
+  <div class="topbar">
+    <h1>Painel VPN</h1>
+    <a href="/logout">Logout</a>
+  </div>
+  <div class="container">
+      <div class="sidebar">
+          <ul>
+            <li><a href="/admin-dashboard">Home</a></li>
+          </ul>
+      </div>
+
+      <div class="content">
+        <h1>Cadastrar novo usuário</h1>
+        <form th:action="@{/registrar-usuario}" th:object="${user}" method="post">
+            <label>Nome completo:</label>
+            <input type="text" th:field="*{fullname}" required />
+            <label>Username:</label>
+            <input type="text" th:field="*{username}" required />
+            <label>Email:</label>
+            <input type="text" th:field="*{email}" required />
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" required />
+            <label>Função:</label>
+            <select th:field="*{role}" required>
+                <option value="0">usuário</option>
+                <option value="1">admin</option>
+            </select>
+            <button type="submit">Criar</button>
+        </form>
+      </div>
+  </div>
+</body>
+</html>

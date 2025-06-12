@@ -1,0 +1,28 @@
+<!-- src/main/resources/static/index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title>PainelVPN</title>
+</head>
+<body>
+    <div>
+        <h2>Painel VPN</h2>
+        <form th:action="@{/user-login}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="/redefinir-senha">Redefinir senha</a>
+    </div>
+    <p style="color:red">
+        <span th:if="${error}" th:text="${error}"></span>
+    </p>
+    <p style="color:green">
+        <span th:if="${message}" th:text="${message}"></span>
+    </p>
+</body>
+</html>

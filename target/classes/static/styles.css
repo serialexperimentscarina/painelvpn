@@ -1,0 +1,65 @@
+body {
+  font-family: 'Georgia', serif;
+  max-width: 50rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+.altbody {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.topbar {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px black solid;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    border: 1px black solid;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    border: 1px black solid;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border: 1px black solid;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px black solid;
+}
